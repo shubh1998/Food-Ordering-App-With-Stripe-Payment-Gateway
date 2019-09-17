@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Admin-Dashboard</title>
+	<!--CSS StyleSheet-->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!--Font Awesome CDN File-->
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!--Bootstrap CDN Files-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+	{{#if user}}
+	<div class="area"></div>
+	<nav class="main-menu">
+
+		<ul>
+			<li>
+				<a href="adminHome"><i class="fa fa-laptop fa-2x"></i>
+					<span class="nav-text"><strong style="color: white;"> Admin DashBoard </strong></span>
+				</a>
+			</li>
+
+			<li class="has-subnav">
+				<a href="adminHome"><i class="fa fa-home fa-2x"></i>
+					<span class="nav-text"> Home </span>
+				</a>
+			</li>
+
+			<li class="has-subnav">
+				<a href="AddProduct"><i class="fa fa-list fa-2x"></i>
+					<span class="nav-text"> Add-Product </span>
+				</a>
+			</li>
+
+			<li>
+				<a href="viewProduct"><i class="fa fa-eye fa-2x"></i>
+					<span class="nav-text"> View-Product </span>
+				</a>
+			</li>
+
+			<li>
+				<a href="viewUsers"><i class="fa fa-users fa-2x"></i>
+					<span class="nav-text"> View-Users </span>
+				</a>
+			</li>
+
+			<li>
+				<a href="currentOrders"><i class="fa fa-cart-arrow-down fa-2x"></i>
+					<span class="nav-text"> Current Orders </span>
+				</a>
+			</li>
+
+			<li>
+				<a href="OrderHistory"><i class="fa fa-history fa-2x"></i>
+					<span class="nav-text"> Order History </span>
+				</a>
+			</li>
+		</ul>
+
+		<ul class="logout">
+			<li>
+				<a href="logout"><i class="fa fa-power-off fa-2x"></i>
+					<span class="nav-text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	<h2 class="Admin">Admin Dashboard : {{user}}</h2>
+	{{/if}}
+	{{{body}}}
+</body>
+
+</html>

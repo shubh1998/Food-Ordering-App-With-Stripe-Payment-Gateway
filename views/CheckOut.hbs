@@ -1,0 +1,91 @@
+<br><br><br><br>
+<div class="container">
+    <form action="/CustomerOrder" method="POST">
+        {{!-- <form action="/pay" method="POST"> --}}
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 style="text-align: center">CheckOut-Detail-form</h2>
+                <br>
+                {{#if UserInfo}}
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"
+                        value='{{UserInfo.Email}}' readonly>
+                </div>
+                <div class="form-group">
+                    <label>Contact number:</label>
+                    <input type="number" class="form-control" placeholder="Enter Contact Number" name="contact"
+                        value='{{UserInfo.Contact}}'>
+                </div>
+
+                <div class="form-group">
+                    <label>Address:</label>
+                    <textarea type="text" class="form-control" placeholder="Enter Address" name="Address"
+                        rows="5">{{UserInfo.Address}}</textarea>
+                </div>
+                {{/if}}
+
+            </div>
+            <div class="col-lg-6" style="padding-left: 5%">
+                <br><br><br>
+                <table class="table table-hover text-center" id="tbl">
+                    <tr>
+                        <th>Name</th>
+                        <th>Unit-Price</th>
+                        <th>Quantity</th>
+                        <th>Total Price (in &#8377;)</th>
+                    </tr>
+                    {{#each data}}
+                    {{#each items}}
+                    <tr>
+                        <td>{{this.Pname}}</td>
+                        <td>{{this.Pprice}}</td>
+                        {{/each}}
+                        <td>{{this.pQuantity}}</td>
+                        <td></td>
+                    </tr>
+                    {{/each}}
+                </table>
+                <hr>
+                <table class="table">
+                    <tr class="bg">
+                        <td class="tdwidth">
+                            <h6 class="text-grand">Grand-Total</h6>
+                        </td>
+                        <td>
+                            <span id="Gtotal" class="grand-total"></span>&#8377;
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        {{!-- <button type="submit" class="btn btn-primary">Submit</button> --}}
+
+        <!--Stripe Payment Gateway-->
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_8WRhgxTLYfx07XoJfZTBQj5L00w25JWm4L" data-amount="50000" data-name="Food-Ordering-App"
+            data-description="Food Order System" data-locale="auto" data-currency="inr">
+            </script>
+
+        <input type="text" name="amount" id="grand-total" value="">
+    </form>
+</div>
+
+<script>
+    var table = document.getElementById("tbl");
+    for (var r = 1; r < table.rows.length; r++) {
+        var n1 = tbl.rows[r].cells[1].innerHTML;
+        var n2 = tbl.rows[r].cells[2].innerHTML;
+        var m = n1 * n2;
+        tbl.rows[r].cells[3].innerHTML = m;
+        m = 0;
+    }
+    sum = 0
+    for (var r = 1; r < table.rows.length; r++) {
+        var num1 = tbl.rows[r].cells[3].innerHTML;
+        var sum = Number(sum) + Number(num1);
+    }
+    document.getElementById("Gtotal").innerHTML = sum;
+    document.getElementById("grand-total").value = sum;
+</script>

@@ -1,0 +1,19 @@
+.inner{
+	overflow: hidden;
+}
+
+.inner img{
+	transition: all 1.5s ease;
+}
+
+.inner:hover img{
+	transform: scale(1.3);
+}
+
+.card{
+	width: 20em !important;
+}
+
+.cardmargin{
+	margin-left: 20px !important;
+}

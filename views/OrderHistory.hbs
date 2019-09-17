@@ -1,0 +1,53 @@
+<div class="container block-user-table">
+    <div class="row">
+        <div class="col-sm-12" style="padding-top: 20px;">
+            <h1 style="color: #1c009e; display:inline;"><b><i>Order-History</i></b></h1>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <table class="table table-hover table-striped">
+
+        <tr class="warning">
+            <th class="text-center">Order Id</th>
+            <th class="text-center">User Email</th>
+            <th class="text-center">Contact</th>
+            <th class="text-center">Address</th>
+            <th class="text-center">Order Details</th>
+            <th class="text-center">Total Price</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Time</th>
+        </tr>
+
+
+        {{#each data}}
+        <tr class="text-center">
+            <td>{{this.orderId}}</td>
+            <td>{{this.CustomerEmail}}</td>
+            <td>{{this.CustomerContact}}</td>
+            <td>{{this.CustomerAddress}}</td>
+            {{!-- <td>{{this.Products}}</td> --}}
+            <td>
+                <table class="table table-hover table-bordered table-striped">
+                    <tr class="text-center">
+                        <th class="text-center">Product Name</th>
+                        <th class="text-center">Product Quantity</th>
+                        <th class="text-center">Product Price</th>
+                    </tr>
+                    {{#each Products}}
+                    <tr>
+                        <td>{{this.ProductName}}</td>
+                        <td>{{this.ProductQuantity}}</td>
+                        <td>{{this.ProductPrice}}</td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </td>
+            <td>{{this.Total}}</td>
+            <td>{{this.Status}}</td>
+            <td>{{this.Time}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>

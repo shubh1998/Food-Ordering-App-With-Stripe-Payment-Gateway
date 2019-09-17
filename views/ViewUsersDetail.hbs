@@ -1,0 +1,29 @@
+<div class="container block-user-table">
+    <div class="row">
+        <div class="col-sm-12" style="padding-top: 20px;">
+            <h1 style="color: #1c009e; display:inline;"><b><i>Registered Users</i></b></h1>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <table class="table table-hover table-striped">
+
+        <tr class="warning">
+            <th class="text-center">User Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Contact</th>
+            <th class="text-center">Address</th>
+        </tr>
+
+
+        {{#each data}}
+        <tr class="text-center">
+            <td>{{this.UserName}}</td>
+            <td>{{this.Email}}</td>
+            <td>{{this.Contact}}</td>
+            <td>{{this.Address}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>

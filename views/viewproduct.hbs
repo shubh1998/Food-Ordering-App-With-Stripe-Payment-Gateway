@@ -1,0 +1,145 @@
+<head>
+    <style>
+        #search {
+            position: relative;
+            font-size: 18px;
+            padding-top: 40px;
+            margin: -20px auto 0;
+        }
+
+        #search label {
+            position: absolute;
+            top: 51px;
+        }
+
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        #search #search-input,
+        #search .hint {
+            padding-left: 43px;
+            padding-right: 43px;
+            border-radius: 23px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .input-lg {
+            height: 46px;
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.3333333;
+            border-radius: 6px;
+        }
+
+        #search #search-clear {
+            text-decoration: none;
+            position: absolute;
+            right: 18px;
+            top: 54px;
+            color: #b3b3b3;
+        }
+    </style>
+
+    <!--AJAX JQuery Live Search-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#searchedDishes').hide();
+            $("#search-input").on("input", function () {
+                var searchDish = $("#search-input").val();
+                var data1 = "name=" + searchDish;
+                //AJAX Code
+                $.ajax({
+                    url: 'searchRecord',
+                    data: data1,
+                    type: 'get',
+                    success: function (response) {
+                        $('#allDishes').hide();
+                        $('#searchedDishes').show();
+                        $('#searchedDishes').empty();
+
+                        for (data of response.searchedData) {
+                            $('#searchedDishes').append(
+                                `<tr class="text-center" id="myTable">
+                                    <td>${data.Pname}</td>
+                                    <td>${data.Pprice} &#8377;</td>
+                                    <td>${data.Pdesc}</td>
+                                    <td>${data.Pcategory}</td>
+                                    <td><img src="/upload/${data.Pimage}" height="50px" width="50px"></td>
+                                    <td><a href="/DeleteProduct?id=${this._id}"  onClick="return confirm('Deleted????')" class="glyphicon glyphicon-trash"></a></td>
+                                    <td><a href="/UpdateProduct?id=${this._id}"  class="glyphicon glyphicon-edit"></a></td>
+                                </tr>`
+                            )
+                        }
+                    }
+                }); //AJAX end
+            })
+        });//ready function end
+    </script>
+</head>
+
+<div class="container block">
+    <div class="row">
+        <div class="col-sm-5" style="padding-top: 20px;">
+            <h1 style="color: #1c009e; display:inline;"><b><i>Products Available</i></b></h1>
+        </div>
+        <div class="col-sm-7">
+            <section id="search">
+                <label for="search-input"><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search
+                        icons</span></label>
+                <input id="search-input" name="search" class="form-control input-lg" placeholder="Search icons"
+                    autocomplete="off" spellcheck="false" autocorrect="off" tabindex="1">
+            </section>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr class="warning">
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th class="text-center">Product Description</th>
+                <th>Product Category</th>
+                <th>Product Image</th>
+                <th>Delete Product</th>
+                <th>Update Product</th>
+            </tr>
+        </thead>
+
+        <tbody id="allDishes">
+            {{#each data}}
+            <tr class="text-center" id="myTable">
+                <td>{{this.Pname}}</td>
+                <td>{{this.Pprice}} &#8377;</td>
+                <td>{{this.Pdesc}}</td>
+                <td>{{this.Pcategory}}</td>
+                <td><img src="/upload/{{this.Pimage}}" height="50px" width="50px"></td>
+                <td><a href="/DeleteProduct?id={{this._id}}" onClick="return confirm('Deleted????')"
+                        class="glyphicon glyphicon-trash"></a></td>
+                <td><a href="/UpdateProduct?id={{this._id}}" class="glyphicon glyphicon-edit"></a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+
+        <tbody id="searchedDishes">
+
+        </tbody>
+
+    </table>
+</div>
